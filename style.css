@@ -1,0 +1,199 @@
+body {
+    touch-action: pan-x pan-y;
+}
+
+select {
+    color: black;
+}
+
+#abc-notation-panels {
+    padding: 0;
+    list-style: none;
+}
+
+.abc-notation-panel {
+    background-color: #bdbdbd;
+    color: black;
+    padding: 1em;
+    line-height: 2em;
+    font-family: monospace;
+    box-shadow: 0 0 2px inset;
+    border-radius: 9px;
+    height: 2em;
+    overflow-y: scroll;
+}
+
+.dark-bg {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+.padding-std {
+    padding: 1em;
+}
+
+.font-sans {
+    font-family: sans-serif;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+#key-buttons,
+.third-width-buttons,
+.quarter-width-buttons,
+#scale-degree-inputs {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    user-select: none;
+}
+
+#key-buttons > li,
+.third-width-buttons > li {
+    width: 33.33%;
+}
+
+.quarter-width-buttons > li {
+    width: 25%;
+}
+
+.quarter-width-buttons > li > button {
+    color: black;
+}
+
+#scale-degree-inputs > li {
+    width: calc(100%/7);
+}
+
+#scale-degree-inputs.show-accidentals > li {
+    width: calc(100%/12);
+}
+
+.btn-accidental {
+    display: none;
+}
+
+.show-accidentals .btn-accidental {
+    display: block;
+}
+
+.buttons-half-width > li {
+    width: 50%;
+}
+
+.btn-octave,
+.btn-rhythm,
+.btn-scale-degree {
+    width: 100%;
+    color: black;
+    font-size: 150%;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.show-accidentals .btn-scale-degree {
+    font-size: 1em;
+    padding: 0.5em 0;
+}
+
+.btn-key {
+    width: 100%;
+}
+
+:root {
+    --red: red;
+    --orange: orange;
+    --yellow: #ffff50;
+    --green: #3cff3c;
+    --blue: #0492ff;
+    --purple: #712071;
+    --violet: violet;
+
+    --red-dark: #981212;
+    --red-light: #ff8c8c;
+    --orange-dark: #cd7200;
+    --orange-light: #ffcd70;
+    --yellow-dark: #868600;
+    --yellow-light: #ffffc2;
+    --green-dark: #004600;
+    --green-light: #8efd8e;
+    --blue-dark: #020279;
+    --blue-light: #62e8ff;
+    --purple-dark: #310031;
+    --purple-light: #f5b6f5;
+    --violet-dark: #5c3e5c;
+    --violet-light: #f3d1f3;
+}
+
+button {
+    background-color: white;
+    user-select: none;
+}
+#btn-scale-degree-1 { background-color: var(--red); }
+#btn-scale-degree-1-down { background-color: var(--red-dark); color: white;}
+#btn-scale-degree-1-up { background-color: var(--red-light); }
+#btn-scale-degree-2 { background-color: var(--orange); }
+#btn-scale-degree-2-down { background-color: var(--orange-dark); color: white; }
+#btn-scale-degree-2-up { background-color: var(--orange-light); }
+#btn-scale-degree-3 { background-color: var(--yellow); }
+#btn-scale-degree-3-down { background-color: var(--yellow-dark); color: white;}
+#btn-scale-degree-3-up { background-color: var(--yellow-light); }
+#btn-scale-degree-4 { background-color: var(--green); }
+#btn-scale-degree-4-down { background-color: var(--green-dark); color: white;}
+#btn-scale-degree-4-up { background-color: var(--green-light); }
+#btn-scale-degree-5 {background-color: var(--blue); }
+#btn-scale-degree-5-down {background-color: var(--blue-dark); color: white; }
+#btn-scale-degree-5-up {background-color: var(--blue-light); }
+#btn-scale-degree-6 {background-color: var(--purple); color: white;}
+#btn-scale-degree-6-down {background-color: var(--purple-dark); color: white;}
+#btn-scale-degree-6-up {background-color: var(--purple-light); }
+#btn-scale-degree-7 { background-color: var(--violet); }
+#btn-scale-degree-7-down { background-color: var(--violet-dark); color: white; }
+#btn-scale-degree-7-up { background-color: var(--violet-light); }
+
+#btn-scale-degree-0 { background-color: white; }
+
+#btn-clear,
+#btn-save,
+#btn-copy,
+#btn-play,
+#btn-backspace {
+    text-transform: uppercase;
+    padding: 1em 0em;
+    width: 100%;
+}
+
+#bpm {
+    width: 4em;
+}
+
+ul.firebaseui-idp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.firebaseui-card-content form {
+    margin: 0;
+}
+
+span.firebaseui-idp-icon-wrapper {
+    display: none;
+}
+
+span.firebaseui-idp-text.firebaseui-idp-text-short {
+    display: none;
+}
+
+#login-options.logged-in #firebaseui-auth-container {
+    display: none;
+}
+
+#user-logo img {
+    border-radius: 50%;
+    width: 20px;
+}
