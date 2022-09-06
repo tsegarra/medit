@@ -197,3 +197,9 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     border-radius: 50%;
     width: 20px;
 }
+
+#transcripts {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1em;
+}
