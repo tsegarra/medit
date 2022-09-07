@@ -160,10 +160,11 @@ button {
 #btn-clear,
 #btn-save,
 #btn-copy,
+#btn-stop,
 #btn-play,
 #btn-backspace {
     text-transform: uppercase;
-    padding: 1em 0em;
+    padding: 1em 0;
     width: 100%;
 }
 
@@ -202,4 +203,19 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     width: 100%;
     text-align: left;
     margin-bottom: 1em;
+}
+
+#loading-circle {
+    display: none;
+}
+
+#loading-circle.loading {
+    display: block;
+}
+
+div#loading-circle {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
 }
