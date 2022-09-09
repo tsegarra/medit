@@ -45,6 +45,7 @@ button {
     border-radius: 2px;
     cursor: pointer;
     padding: 11px 0.5em;
+    touch-action: manipulation;
     box-shadow: 0 0 2px black;
 }
 
