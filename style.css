@@ -226,11 +226,23 @@ header > h1 {
     padding-bottom: 2px;
 }
 
-.tabs {
-    min-height: 182px;
-}
-
 h1 > a {
     text-decoration: none;
     color: inherit;
+}
+
+.tab-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    padding: 0.5em;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 1px 5px black;
+}
+
+.firebaseui-idp-button {
+    padding-top: 3px;
+    padding-bottom: 2px;
 }
