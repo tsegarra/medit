@@ -3,6 +3,7 @@
     <title>ABC Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/9d84495d6e.js" crossorigin="anonymous"></script>
 </head>
 <body class="dark-bg padding-std font-sans">
 <header>
@@ -17,16 +18,16 @@
     <p class="abc-notation-panel"></p>
 
     <div id="playback-buttons" class="button-row row-halves">
-        <button id="btn-play">&#9658;</button>
-        <button id="btn-stop">&#9632;</button>
+        <button id="btn-play"><i class="fa-solid fa-play"></i></button>
+        <button id="btn-stop"><i class="fa-solid fa-square"></i></button>
     </div>
 
     <section class="menu">
         <div class="button-row row-quarters">
-            <button id="btn-index">Index</button>
-            <button id="btn-clear">Clear</button>
-            <button id="btn-copy">Copy</button>
-            <button id="btn-save">Save</button>
+            <button id="btn-index"><i class="fa-solid fa-list"></i></button>
+            <button id="btn-clear"><i class="fa-solid fa-trash"></i></button>
+            <button id="btn-copy"><i class="fa-regular fa-copy"></i></button>
+            <button id="btn-save"><i class="fa-solid fa-floppy-disk"></i></button>
         </div>
     </section>
 
@@ -85,7 +86,7 @@
                 </div>
 
                 <div class="button-row row-thirds">
-                    <button id="btn-backspace">&larr;</button>
+                    <button id="btn-backspace"><i class="fa-solid fa-delete-left"></i></button>
                     <button id="btn-scale-degree-0">Rest</button>
                     <button class="btn-octave" id="btn-toggle-accidentals">#/b</button>
                 </div>
@@ -93,12 +94,12 @@
 
             <div class="tab rhythm-tab">
                 <div class="button-row row-halves">
-                    <button id="btn-rhythm-prev" class="btn-rhythm">&lt;</button>
-                    <button id="btn-rhythm-diminish" class="btn-rhythm">-</button>
+                    <button id="btn-rhythm-prev" class="btn-rhythm"><i class="fa-solid fa-left-long"></i></button>
+                    <button id="btn-rhythm-diminish" class="btn-rhythm"><i class="fa-solid fa-minus"></i></button>
                 </div>
                 <div class="button-row row-halves">
-                    <button id="btn-rhythm-next" class="btn-rhythm">&gt;</button>
-                    <button id="btn-rhythm-augment" class="btn-rhythm">+</button>
+                    <button id="btn-rhythm-next" class="btn-rhythm"><i class="fa-solid fa-right-long"></i></button>
+                    <button id="btn-rhythm-augment" class="btn-rhythm"><i class="fa-solid fa-plus"></i></button>
                 </div>
             </div>
 
