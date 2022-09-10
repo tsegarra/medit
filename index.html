@@ -13,7 +13,7 @@
     </div>
 </header>
 
-<main>
+<main class="pitch-selected">
     <p class="abc-notation-panel"></p>
 
     <div id="playback-buttons" class="button-row row-halves">
@@ -21,9 +21,24 @@
         <button id="btn-stop">&#9632;</button>
     </div>
 
+    <section class="menu">
+        <div class="button-row row-quarters">
+            <button id="btn-index">Index</button>
+            <button id="btn-clear">Clear</button>
+            <button id="btn-copy">Copy</button>
+            <button id="btn-save">Save</button>
+        </div>
+    </section>
+
     <div class="tab-container">
+        <div class="button-row row-thirds">
+            <button id="btn-select-pitch">Pitch</button>
+            <button id="btn-select-rhythm">Rhythm</button>
+            <button id="btn-select-metadata">Metadata</button>
+        </div>
+
         <div class="tabs">
-            <div id="scale-degree-inputs" class="tab melody-tab">
+            <div id="scale-degree-inputs" class="tab pitch-tab">
                 <div class="button-row">
                     <button class="btn-scale-degree" id="btn-scale-degree-1-down">1</button>
                     <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2-down">b2</button>
@@ -77,72 +92,61 @@
             </div>
 
             <div class="tab rhythm-tab">
-                <div class="button-row row-quarters">
+                <div class="button-row row-halves">
                     <button id="btn-rhythm-prev" class="btn-rhythm">&lt;</button>
-                    <button id="btn-rhythm-next" class="btn-rhythm">&gt;</button>
-                    <button id="btn-rhythm-augment" class="btn-rhythm">+</button>
                     <button id="btn-rhythm-diminish" class="btn-rhythm">-</button>
                 </div>
+                <div class="button-row row-halves">
+                    <button id="btn-rhythm-next" class="btn-rhythm">&gt;</button>
+                    <button id="btn-rhythm-augment" class="btn-rhythm">+</button>
+                </div>
+            </div>
+
+            <div class="tab metadata-tab">
+                <section id="metadata">
+                    <label for="abc-metadata-key">Key</label>
+                    <select id="abc-metadata-key">
+                        <option value="C">C</option>
+                        <option value="Db">C#/Db</option>
+                        <option value="D">D</option>
+                        <option value="Eb">D#/Eb</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="F#">F#/Gb</option>
+                        <option value="G">G</option>
+                        <option value="Ab">G#/Ab</option>
+                        <option value="A">A</option>
+                        <option value="Bb">A#/Bb</option>
+                        <option value="B">B</option>
+                    </select>
+                    <br />
+
+                    <label for="abc-metadata-octave">Octave</label>
+                    <button class="btn-octave" id="btn-octave-down">-</button>
+                    <span id="abc-metadata-octave">1</span>
+                    <button class="btn-octave" id="btn-octave-up">+</button>
+                    <br />
+
+                    <input type="checkbox" id="swung" name="swung" />
+                    <label for="swung">Swung</label>
+                    <br />
+
+                    <label for="abc-metadata-output-subdivisions-per-measure">Measure subdivisions</label>
+                    <span id="abc-metadata-output-subdivisions-per-measure">16</span>
+                    <button class="btn-octave" id="btn-toggle-subdivision">8/16</button>
+
+                    <br />
+
+                    <form id="metadata-text-inputs">
+                        <label for="bpm">BPM</label><input type="number" name="bpm" id="bpm" /><br />
+                        <label for="song-title">Title</label><input type="text" name="song-title" id="song-title" /><br />
+                        <label for="song-artist">Artist</label><input type="text" name="song-artist" id="song-artist" /><br />
+                        <label for="song-section">Section</label><input type="text" name="song-section" id="song-section" />
+                    </form>
+                </section>
             </div>
         </div>
-
-        <div class="button-row row-halves">
-            <button id="btn-select-pitch">Pitch</button>
-            <button id="btn-select-rhythm">Rhythm</button>
-        </div>
     </div>
-
-    <section id="metadata">
-        <label for="abc-metadata-key">Key</label>
-        <select id="abc-metadata-key">
-            <option value="C">C</option>
-            <option value="Db">C#/Db</option>
-            <option value="D">D</option>
-            <option value="Eb">D#/Eb</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-            <option value="F#">F#/Gb</option>
-            <option value="G">G</option>
-            <option value="Ab">G#/Ab</option>
-            <option value="A">A</option>
-            <option value="Bb">A#/Bb</option>
-            <option value="B">B</option>
-        </select>
-        <br />
-
-        <label for="abc-metadata-octave">Octave</label>
-        <button class="btn-octave" id="btn-octave-down">-</button>
-        <span id="abc-metadata-octave">1</span>
-        <button class="btn-octave" id="btn-octave-up">+</button>
-        <br />
-
-        <input type="checkbox" id="swung" name="swung" />
-        <label for="swung">Swung</label>
-        <br />
-
-        <label for="abc-metadata-output-subdivisions-per-measure">Measure subdivisions</label>
-        <span id="abc-metadata-output-subdivisions-per-measure">16</span>
-        <button class="btn-octave" id="btn-toggle-subdivision">8/16</button>
-
-        <br />
-
-        <form id="metadata-text-inputs">
-            <label for="bpm">BPM</label><input type="number" name="bpm" id="bpm" /><br />
-            <label for="song-title">Title</label><input type="text" name="song-title" id="song-title" /><br />
-            <label for="song-artist">Artist</label><input type="text" name="song-artist" id="song-artist" /><br />
-            <label for="song-section">Section</label><input type="text" name="song-section" id="song-section" />
-        </form>
-    </section>
-
-    <section class="menu">
-        <div class="button-row row-thirds">
-            <button id="btn-clear">Clear</button>
-            <button id="btn-copy">Copy</button>
-            <button id="btn-save">Save</button>
-        </div>
-
-        <p><a href="list">Transcript index</a></p>
-    </section>
 </main>
 
 <div id="loading-circle"><img src="loading.gif" alt="Loading..." /></div>
