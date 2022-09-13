@@ -15,6 +15,14 @@
 </header>
 
 <main class="pitch-selected">
+    <p id="debug-panel" style="display:none;"></p>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('debug')) {
+            document.getElementById('debug-panel').style.display = 'block';
+        }
+    </script>
+
     <p class="abc-notation-panel"></p>
 
     <div id="playback-buttons" class="button-row row-halves">
