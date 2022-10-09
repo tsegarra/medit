@@ -238,6 +238,9 @@ h1 > a {
     display: none;
 }
 
+.selected-4-4 #btn-time-sig-4-4,
+.selected-6-8 #btn-time-sig-6-8,
+.selected-12-8 #btn-time-sig-12-8,
 .metadata-selected #btn-select-metadata,
 .rhythm-selected #btn-select-rhythm,
 .pitch-selected #btn-select-pitch {
