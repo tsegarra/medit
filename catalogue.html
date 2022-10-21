@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sheets API Quickstart</title>
+    <meta charset="utf-8" />
+    <style>
+      td {
+        border: 1px solid black;
+        vertical-align: top;
+        padding: 0.25em 0.5em;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      .image-album,
+      .image-artist {
+        width: 110px;
+        max-width: 100%;
+      }
+
+      .album-name,
+      .artist-name {
+        margin-top: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script>
+      function gapiLoaded() {
+          gapi.load('client', function () {
+            gapi.client.init({
+              apiKey: 'AIzaSyBJ4niYNhHDOLMFw-HT4y6vtoDHwm-r5DI',
+              discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+            }).then(() => {
+              gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: '1o8sUVbWFUNOwnGn9si_QhHQOrx_VyXymN549TlEYuD0',
+                range: 'A1:F1000',
+              }).then((response) => {
+                const range = response.result;
+                if (!range || !range.values || range.values.length === 0) {
+                  console.log('no values found');
+                  return;
+                }
+                const artists = SpreadsheetParser.parse(range.values);
+                SpreadsheetParser.writeTableToDom(artists);
+              });
+            });
+          });
+      }
+    </script>
+    <script src="catalogue.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+  </body>
+</html>
