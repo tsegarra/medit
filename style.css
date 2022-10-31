@@ -258,3 +258,7 @@ h1 > a {
     padding-top: 3px;
     padding-bottom: 2px;
 }
+
+.key-input-container {
+    margin-bottom: 1em;
+}
