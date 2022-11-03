@@ -3,6 +3,7 @@
   <head>
     <title>Dashboard</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
     <style>
       td {
         border: 1px solid black;
@@ -25,9 +26,65 @@
         margin-top: 0;
       }
 
+      #catalogue-container {
+        padding: 1em;
+      }
+
+      #catalogue-container > h3 {
+        margin-top: 0;
+      }
+
+      #catalogue-container > ul {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        justify-content: space-between;
+        font-family: sans-serif;
+      }
+
+      #catalogue-container > ul > li {
+        width: calc(20% - 8px);
+        list-style: none;
+        cursor: pointer;
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 2em;
+      }
+
+      #catalogue-container > ul > li > img {
+          width: 100%;
+          height: auto;
+          box-shadow: 0 0 2px;
+      }
+
+      .img-round {
+        border-radius: 50%;
+      }
+
+      #catalogue-container > ul.no-images {
+          display: block;
+          margin-bottom: 1em;
+      }
+
+      #catalogue-container > ul.no-images > li {
+          width: 100%;
+          text-align: left;
+          margin: 0 0 0.5em 1em;
+          list-style: disc;
+      }
+
+      #catalogue-container ul li div a {
+          margin-right: 1em;
+      }
     </style>
   </head>
   <body>
+    <header>
+        <h1><a href="index.html">ABC Editor</a></h1>
+    </header>
+
+    <div id="catalogue-container"></div>
     <script>
       function gapiLoaded() {
           gapi.load('client', function () {
