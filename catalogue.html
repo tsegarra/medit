@@ -27,33 +27,41 @@
         margin-top: 0;
       }
 
-      #catalogue-container {
+      .catalogue {
         padding: 1em;
       }
 
-      #catalogue-container > h3 {
+      .catalogue > h3 {
         margin-top: 0;
       }
 
-      #catalogue-container > ul {
-        display: flex;
-        flex-wrap: wrap;
+      .catalogue > ul {
         margin: 0;
         padding: 0;
-        justify-content: space-between;
         font-family: sans-serif;
       }
 
-      #catalogue-container > ul > li {
-        width: calc(20% - 8px);
+      .catalogue > ul > li {
+        width: 20%;
         list-style: none;
-        cursor: pointer;
         font-size: 12px;
         text-align: center;
         margin-bottom: 2em;
+        display: inline-block;
+        vertical-align: top;
+        padding-right: 1em;
+        box-sizing: border-box;
       }
 
-      #catalogue-container > ul > li > img {
+      .catalogue > ul > li:nth-child(5n) {
+        padding-right: 0;
+      }
+
+      .catalogue > ul > li > div {
+        cursor: pointer;
+      }
+
+      .catalogue > ul > li > div > img {
           width: 100%;
           height: auto;
           box-shadow: 0 0 2px;
@@ -63,20 +71,81 @@
         border-radius: 50%;
       }
 
-      #catalogue-container > ul.no-images {
+      .catalogue > ul.no-images {
           display: block;
           margin-bottom: 1em;
       }
 
-      #catalogue-container > ul.no-images > li {
+      .catalogue > ul.no-images > li {
           width: 100%;
           text-align: left;
           margin: 0 0 0.5em 1em;
           list-style: disc;
       }
 
-      #catalogue-container ul li div a {
+      .catalogue ul li div a {
           margin-right: 1em;
+      }
+
+      button {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      .catalogue > ul >li.has-progress-bar {
+        width: 100%;
+        text-align: left;
+      }
+
+      .catalogue > ul > li.has-progress-bar img {
+        width: 20%;
+        margin-right: 1em;
+      }
+
+      .bar-out {
+        border: 1px solid;
+        position: relative;
+        border-radius: 3px;
+        width: 100%;
+      }
+
+      .bar-in {
+        background-color: #89fa75;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+
+      .catalogue > ul > li.has-progress-bar > div {
+        display: flex;
+      }
+
+      .bar-text {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding: 1em;
+      }
+
+      @media(min-width: 950px) {
+        .catalogue > ul > li {
+          width: 10%;
+        }
+
+        .catalogue > ul > li:nth-child(5n) {
+          padding-right: 1em;
+        }
+
+        .catalogue > ul > li:nth-child(10n) {
+          padding-right: 0;
+        }
+
+        .catalogue > ul > li.has-progress-bar img {
+          width: 10%;
+        }
       }
     </style>
   </head>
@@ -85,7 +154,8 @@
         <h1><a href="index.html">ABC Editor</a></h1>
     </header>
 
-    <div id="catalogue-container"></div>
+    <div class="catalogue" id="catalogue-container"></div>
+
     <script>
       function gapiLoaded() {
           gapi.load('client', function () {
