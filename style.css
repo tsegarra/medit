@@ -262,3 +262,11 @@ h1 > a {
 .key-input-container {
     margin-bottom: 1em;
 }
+
+#metadata #btn-tap-tempo {
+    display: block;
+    margin-bottom: 1em;
+    font-size: 19px;
+    padding: 18px;
+    width: 50%;
+}
