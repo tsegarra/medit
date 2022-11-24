@@ -119,13 +119,21 @@
             </div>
 
             <div class="tab rhythm-tab">
-                <div class="button-row row-halves">
-                    <button id="btn-rhythm-prev" class="btn-rhythm"><i class="fa-solid fa-left-long"></i></button>
-                    <button id="btn-rhythm-diminish" class="btn-rhythm"><i class="fa-solid fa-minus"></i></button>
+                <div class="row-quarters">
+                    <button id="btn-rhythm-prev">&lt;</button>
+                    <button id="btn-rhythm-next">&gt;</button>
+                    <button id="btn-pickup">Pickup</button>
+                    <button id="btn-tie">TIE</button>
                 </div>
-                <div class="button-row row-halves">
-                    <button id="btn-rhythm-next" class="btn-rhythm"><i class="fa-solid fa-right-long"></i></button>
-                    <button id="btn-rhythm-augment" class="btn-rhythm"><i class="fa-solid fa-plus"></i></button>
+                <div class="row-thirds">
+                    <button id="btn-whole">W</button>
+                    <button id="btn-half">H</button>
+                    <button id="btn-quarter">Q</button>
+                </div>
+                <div class="row-thirds">
+                    <button id="btn-eighth">E</button>
+                    <button id="btn-sixteenth">S</button>
+                    <button id="btn-dot">.</button>
                 </div>
             </div>
 
@@ -141,8 +149,8 @@
                     <label for="swung">Swung</label>
                     <br />
 
-                    <label for="abc-metadata-output-subdivisions-per-measure">Measure subdivisions</label>
-                    <span id="abc-metadata-output-subdivisions-per-measure">16</span>
+                    <label for="abc-metadata-output-swing-subdivisions">Swing subdivision</label>
+                    <span id="abc-metadata-output-swing-subdivisions">16n</span>
                     <button class="btn-octave" id="btn-toggle-subdivision">8/16</button>
                     <br />
 

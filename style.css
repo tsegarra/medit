@@ -238,6 +238,7 @@ h1 > a {
     display: none;
 }
 
+.in-tie-mode #btn-tie,
 .selected-4-4 #btn-time-sig-4-4,
 .selected-6-8 #btn-time-sig-6-8,
 .selected-12-8 #btn-time-sig-12-8,
