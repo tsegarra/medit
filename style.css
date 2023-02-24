@@ -138,6 +138,10 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     background-color: white;
 }
 
+.abc-notation-panel.invalid {
+    color: red;
+}
+
 body {
     font-family: sans-serif;
     margin: 0;
