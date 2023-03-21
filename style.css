@@ -181,7 +181,7 @@ header > h1 {
     width: calc((100% - (var(--btn-gap) * 10))/11);
 }
 
-.row-halves > button {
+.oow-halves > button {
     width: calc((100% - var(--btn-gap))/2);
     border: none;
     background-color: white;
@@ -193,6 +193,10 @@ header > h1 {
 
 .row-quarters > button {
     width: calc((100% - (var(--btn-gap) * 3))/4);
+}
+
+.row-fifths > button {
+    width: calc((100% - (var(--btn-gap) * 4))/5);
 }
 
 #metadata label {
