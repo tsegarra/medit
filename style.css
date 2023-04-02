@@ -181,7 +181,7 @@ header > h1 {
     width: calc((100% - (var(--btn-gap) * 10))/11);
 }
 
-.oow-halves > button {
+.row-halves > button {
     width: calc((100% - var(--btn-gap))/2);
     border: none;
     background-color: white;
@@ -279,3 +279,5 @@ h1 > a {
     padding: 18px;
     width: 50%;
 }
+
+.hidden-until-player-loaded { display: none; }
