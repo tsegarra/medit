@@ -37,6 +37,14 @@
             <button id="btn-copy"><i class="fa-regular fa-copy"></i></button>
             <button id="btn-save"><i class="fa-solid fa-floppy-disk"></i></button>
         </div>
+
+        <div class="spotify-controls button-row row-fifths">
+            <button class="hidden-until-player-loaded" id="seekBackward15">-15</button>
+            <button class="hidden-until-player-loaded" id="seekBackward3">-3</button>
+            <button class="hidden-until-player-loaded" id="togglePlay">Play</button>
+            <button class="hidden-until-player-loaded" id="seekForward3">+3</button>
+            <button class="hidden-until-player-loaded" id="seekForward15">+15</button>
+        </div>
     </section>
 
     <div class="tab-container">
@@ -183,5 +191,140 @@
 <div id="loading-circle"><img src="loading.gif" alt="Loading..." /></div>
 
 <script src="bundle.js"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+<script>
+const tokenKey = 'spotify_token'
+const btnPlay = document.getElementById('togglePlay');
+const btnSeekForward3 = document.getElementById('seekForward3');
+const btnSeekForward15 = document.getElementById('seekForward15');
+const btnSeekBackward3 = document.getElementById('seekBackward3');
+const btnSeekBackward15 = document.getElementById('seekBackward15');
+const hiddenButtons = document.getElementsByClassName('hidden-until-player-loaded');
+
+function connectToSpotify(token) {
+    const player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => {
+            cb(token);
+        },
+        volume: 0.5
+    });
+
+    player.addListener('ready', ({device_id}) => {
+        localStorage.setItem(tokenKey, token);
+        console.log('Ready with Device ID', device_id);
+        transferToDevice(device_id, token);
+        Array.from(hiddenButtons).forEach((button) => {
+            button.classList.remove('hidden-until-player-loaded');
+        });
+    });
+
+    player.addListener('not_ready', ({device_id}) => {
+        console.log('Device ID has gone offline', device_id);
+    });
+
+    player.addListener('initialization_error', ({message}) => {
+        console.log('init error');
+        console.error(message);
+    });
+
+    player.addListener('authentication_error', ({message}) => {
+        getNewToken();
+        console.log('auth_error');
+        console.error(message);
+    });
+
+    player.addListener('account_error', ({message}) => {
+        console.log('account_error');
+        console.error(message);
+    });
+
+    btnSeekForward3.onclick = function () {
+        changePosition(player, 3);
+    };
+
+    btnSeekForward15.onclick = function () {
+        changePosition(player, 15);
+    };
+
+    btnSeekBackward3.onclick = function () {
+        changePosition(player, -3);
+    };
+
+    btnSeekBackward15.onclick = function () {
+        changePosition(player, -15);
+    };
+
+    btnPlay.onclick = function () {
+        console.log('toggle play');
+        player.togglePlay().then(() => {
+            player.getCurrentState().then(state => {
+                if (state) {
+                    if (state.paused) {
+                        btnPlay.textContent = 'Pause';
+                    } else {
+                        btnPlay.textContent = 'Play';
+                    }
+                } else {
+                    alert('Set your device in Spotify to the SDK.');
+                }
+            });
+        });
+    };
+
+    player.connect();
+}
+
+window.onSpotifyWebPlaybackSDKReady = () => {
+    const localToken = localStorage.getItem(tokenKey);
+
+    const currentUrl = window.location.href;
+    const queryString = currentUrl.split('#')[1];
+    const params = new URLSearchParams(queryString);
+    const tokenFromQueryString = params.get('access_token');
+
+    if (tokenFromQueryString) {
+        history.pushState(null, "", location.href.split("#")[0]);
+        connectToSpotify(tokenFromQueryString);
+    } else if (localToken) {
+        connectToSpotify(localToken);
+    } else {
+        getNewToken();
+    }
+};
+
+function getNewToken() {
+    const clientId = '3c969ca08c62441186e99afc7ba69477';
+    const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=streaming+user-read-email+user-modify-playback-state+user-read-private&redirect_uri=https%3A%2F%2Ftsegarra.github.io%2Fmedit&state=075a4495-70d1-4862-be93-71c0ce1d845d`;
+    window.location.href = authUrl;
+}
+
+function transferToDevice(id, token) {
+    const data = {
+        device_ids: [id],
+        play: true,
+    };
+    fetch('https://api.spotify.com/v1/me/player', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => console.log(response));
+}
+
+function changePosition(player, deltaSeconds) {
+    player.getCurrentState().then(state => {
+        if (state) {
+            player.seek(state.position + 1000*deltaSeconds).then(() => console.log('sought'));
+        } else {
+            alert('Set your device in Spotify to the SDK.');
+        }
+    });
+}
+</script>
 </body>
 </html>
