@@ -182,6 +182,8 @@
                         <label for="song-artist">Artist</label><input type="text" name="song-artist" id="song-artist" /><br />
                         <label for="song-section">Section</label><input type="text" name="song-section" id="song-section" />
                     </form>
+
+                    <button id="spotify-transfer">Transfer</button>
                 </section>
             </div>
         </div>
@@ -194,12 +196,14 @@
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 
 <script>
-const tokenKey = 'spotify_token'
+const tokenKey = 'spotify_token';
+const deviceIdKey = 'spotify_device_id';
 const btnPlay = document.getElementById('togglePlay');
 const btnSeekForward3 = document.getElementById('seekForward3');
 const btnSeekForward15 = document.getElementById('seekForward15');
 const btnSeekBackward3 = document.getElementById('seekBackward3');
 const btnSeekBackward15 = document.getElementById('seekBackward15');
+const btnTransfer = document.getElementById('spotify-transfer');
 const hiddenButtons = document.getElementsByClassName('hidden-until-player-loaded');
 
 function connectToSpotify(token) {
@@ -213,6 +217,7 @@ function connectToSpotify(token) {
 
     player.addListener('ready', ({device_id}) => {
         localStorage.setItem(tokenKey, token);
+        localStorage.setItem(deviceIdKey, device_id);
         console.log('Ready with Device ID', device_id);
         transferToDevice(device_id, token);
         Array.from(hiddenButtons).forEach((button) => {
@@ -325,6 +330,10 @@ function changePosition(player, deltaSeconds) {
         }
     });
 }
+
+btnTransfer.onclick = function() {
+    transferToDevice(localStorage.getItem(deviceIdKey), localStorage.getItem(tokenKey));
+};
 </script>
 </body>
 </html>
