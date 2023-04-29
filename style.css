@@ -149,6 +149,15 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     max-height: 1em;
 }
 
+#debug-panel {
+    max-height: 10em;
+    overflow-y: scroll;
+    border: 1px solid #aeacac;
+    padding: 1em;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
 .abc-notation-panel.invalid {
     color: red;
 }
@@ -240,12 +249,6 @@ h1 > a {
     box-shadow: 0 1px 5px black;
 }
 
-#btn-rhythm-next, #btn-rhythm-augment {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    font-size: 24px;
-}
-
 .tabs {
     min-height: 184px;
     display: flex;
@@ -257,21 +260,44 @@ h1 > a {
     display: none;
 }
 
+.row-duration > button {
+    padding: 0;
+    height: 36px;
+}
+
+.row-duration > button > img {
+    max-width: 100%;
+    max-height: 24px;
+}
+
+#btn-whole > img {
+    height: 8px;
+}
+
 .in-tie-mode #btn-tie,
 .selected-4-4 #btn-time-sig-4-4,
 .selected-6-8 #btn-time-sig-6-8,
 .selected-12-8 #btn-time-sig-12-8,
 .metadata-selected #btn-select-metadata,
 .rhythm-selected #btn-select-rhythm,
+.debug-selected #btn-select-debug,
 .pitch-selected #btn-select-pitch {
     box-shadow: 0 0 3px inset;
     background-color: #d3e0fb;
 }
 
+.debug-selected .debug-tab,
 .metadata-selected .metadata-tab,
 .rhythm-selected .rhythm-tab,
 .pitch-selected .pitch-tab {
     display: block;
+}
+
+.rhythm-tab div {
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 .firebaseui-idp-button {
@@ -288,7 +314,15 @@ h1 > a {
     margin-bottom: 1em;
     font-size: 19px;
     padding: 18px;
-    width: 50%;
+    width: 100%;
+}
+
+#btn-toggle-subdivision {
+    margin-bottom: 0.75em;
+}
+
+.control-group-octave {
+    margin-bottom: 0.5em;
 }
 
 .hidden-until-player-loaded { display: none; }

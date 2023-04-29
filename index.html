@@ -15,17 +15,9 @@
 </header>
 
 <main class="pitch-selected">
-    <p id="debug-panel" style="display:none;"></p>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('debug')) {
-            document.getElementById('debug-panel').style.display = 'block';
-        }
-    </script>
-
     <p class="abc-notation-panel"></p>
 
-    <p class="prediction-panel">...</p>
+    <p class="prediction-panel">[]</p>
 
     <div id="playback-buttons" class="button-row row-halves">
         <button id="btn-play"><i class="fa-solid fa-play"></i></button>
@@ -50,10 +42,11 @@
     </section>
 
     <div class="tab-container">
-        <div class="button-row row-thirds">
+        <div class="button-row row-quarters">
             <button id="btn-select-pitch">Pitch</button>
             <button id="btn-select-rhythm">Rhythm</button>
             <button id="btn-select-metadata">Metadata</button>
+            <button id="btn-select-debug">Debug</button>
         </div>
 
         <div class="tabs">
@@ -129,34 +122,37 @@
             </div>
 
             <div class="tab rhythm-tab">
-                <div class="row-quarters">
+                <div class="row-halves">
                     <button id="btn-rhythm-prev">&lt;</button>
                     <button id="btn-rhythm-next">&gt;</button>
+                </div>
+                <div class="row-thirds">
                     <button id="btn-pickup">Pickup</button>
-                    <button id="btn-tie">TIE</button>
+                    <button id="btn-tie">Tie</button>
+                    <button id="btn-dot">Dot</button>
                 </div>
-                <div class="row-quarters">
-                    <button id="btn-whole">W</button>
-                    <button id="btn-half">H</button>
-                    <button id="btn-quarter">Q</button>
-                    <button id="btn-eighth">E</button>
+                <div class="row-quarters row-duration">
+                    <button id="btn-whole"><img src="images/whole.png" alt="Whole note" /></button>
+                    <button id="btn-half"><img src="images/half.png" alt="Half note" /></button>
+                    <button id="btn-quarter"><img src="images/quarter.png" alt="Quarter note" /></button>
+                    <button id="btn-eighth"><img src="images/eighth.png" alt="Eighth note" /></button>
                 </div>
-                <div class="row-fifths">
-                    <button id="btn-sixteenth">S</button>
-                    <button id="btn-thirty-second">T</button>
-                    <button id="btn-dot">.</button>
-                    <button id="btn-q-triplets">3Q</button>
-                    <button id="btn-e-triplets">3E</button>
+                <div class="row-quarters row-duration">
+                    <button id="btn-sixteenth"><img src="images/sixteenth.png" alt="Sixteenth note" /></button>
+                    <button id="btn-thirty-second"><img src="images/thirtysecond.png" alt="Thirty-second note" /></button>
+                    <button id="btn-q-triplets"><img src="images/quarter3.png" alt="Quarter note triplets" /></button>
+                    <button id="btn-e-triplets"><img src="images/eighth3.png" alt="Eighth note triplets" /></button>
                 </div>
             </div>
 
             <div class="tab metadata-tab">
                 <section id="metadata">
-                    <label for="abc-metadata-octave">Octave</label>
-                    <button class="btn-octave" id="btn-octave-down">-</button>
-                    <span id="abc-metadata-octave">1</span>
-                    <button class="btn-octave" id="btn-octave-up">+</button>
-                    <br />
+                    <div class="control-group-octave">
+                        <label for="abc-metadata-octave">Octave</label>
+                        <button class="btn-octave" id="btn-octave-down">-</button>
+                        <span id="abc-metadata-octave">1</span>
+                        <button class="btn-octave" id="btn-octave-up">+</button>
+                    </div>
 
                     <input type="checkbox" id="swung" name="swung" />
                     <label for="swung">Swung</label>
@@ -179,14 +175,16 @@
 
                     <form id="metadata-text-inputs">
                         <label for="bpm">BPM</label><input type="number" name="bpm" id="bpm" /><br />
-                        <button id="btn-tap-tempo">TAP</button>
+                        <button id="btn-tap-tempo">Tempo Tap</button>
                         <label for="song-title">Title</label><input type="text" name="song-title" id="song-title" /><br />
                         <label for="song-artist">Artist</label><input type="text" name="song-artist" id="song-artist" /><br />
                         <label for="song-section">Section</label><input type="text" name="song-section" id="song-section" />
                     </form>
-
-                    <button id="spotify-transfer">Transfer</button>
                 </section>
+            </div>
+
+            <div class="tab debug-tab">
+                <p id="debug-panel"></p>
             </div>
         </div>
     </div>
@@ -205,10 +203,16 @@ const btnSeekForward3 = document.getElementById('seekForward3');
 const btnSeekForward15 = document.getElementById('seekForward15');
 const btnSeekBackward3 = document.getElementById('seekBackward3');
 const btnSeekBackward15 = document.getElementById('seekBackward15');
-const btnTransfer = document.getElementById('spotify-transfer');
 const hiddenButtons = document.getElementsByClassName('hidden-until-player-loaded');
+const debugPanel = document.getElementById("debug-panel");
+
+function debugLog(message) {
+    const timestamp = (new Date()).toLocaleTimeString()
+    debugPanel.innerHTML += `[${timestamp}] ${message}<br />`;
+}
 
 function connectToSpotify(token) {
+    debugLog("connecting to spotify...");
     const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => {
@@ -218,6 +222,7 @@ function connectToSpotify(token) {
     });
 
     player.addListener('ready', ({device_id}) => {
+        debugLog("player is ready");
         localStorage.setItem(tokenKey, token);
         localStorage.setItem(deviceIdKey, device_id);
         console.log('Ready with Device ID', device_id);
@@ -228,23 +233,30 @@ function connectToSpotify(token) {
     });
 
     player.addListener('not_ready', ({device_id}) => {
+        debugLog("device id has gone offline");
         console.log('Device ID has gone offline', device_id);
     });
 
     player.addListener('initialization_error', ({message}) => {
         console.log('init error');
         console.error(message);
+        debugLog("initialization error:");
+        debugLog(message);
     });
 
     player.addListener('authentication_error', ({message}) => {
         getNewToken();
         console.log('auth_error');
         console.error(message);
+        debugLog("authentication error:");
+        debugLog(message);
     });
 
     player.addListener('account_error', ({message}) => {
         console.log('account_error');
         console.error(message);
+        debugLog("account error:");
+        debugLog(message);
     });
 
     btnSeekForward3.onclick = function () {
@@ -269,11 +281,14 @@ function connectToSpotify(token) {
             player.getCurrentState().then(state => {
                 if (state) {
                     if (state.paused) {
+                        debugLog("(state paused)");
                         btnPlay.textContent = 'Pause';
                     } else {
+                        debugLog("(state != paused, changing text to 'Play'. could be something else though)");
                         btnPlay.textContent = 'Play';
                     }
                 } else {
+                    debugLog("no state was returned");
                     alert('Set your device in Spotify to the SDK.');
                 }
             });
@@ -284,6 +299,8 @@ function connectToSpotify(token) {
 }
 
 window.onSpotifyWebPlaybackSDKReady = () => {
+    debugLog("spotify web playback sdk ready");
+
     const localToken = localStorage.getItem(tokenKey);
 
     const currentUrl = window.location.href;
@@ -291,28 +308,33 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     const params = new URLSearchParams(queryString);
     const tokenFromQueryString = params.get('access_token');
 
-    // todo re-enable these
     if (tokenFromQueryString) {
-        //history.pushState(null, "", location.href.split("#")[0]);
-        //connectToSpotify(tokenFromQueryString);
+        debugLog("has token from querystring");
+        history.pushState(null, "", location.href.split("#")[0]);
+        connectToSpotify(tokenFromQueryString);
     } else if (localToken) {
-        //connectToSpotify(localToken);
+        debugLog("no token in querystring; has token in local storage");
+        connectToSpotify(localToken);
     } else {
-        //getNewToken();
+        debugLog("no token in querystring or localstorage; getting new token")
+        getNewToken();
     }
 };
 
 function getNewToken() {
+    debugLog("getting new token...");
     const clientId = '3c969ca08c62441186e99afc7ba69477';
     const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=streaming+user-read-email+user-modify-playback-state+user-read-private&redirect_uri=https%3A%2F%2Ftsegarra.github.io%2Fmedit&state=075a4495-70d1-4862-be93-71c0ce1d845d`;
     window.location.href = authUrl;
 }
 
 function transferToDevice(id, token) {
+    debugLog("transferring to device...");
     const data = {
         device_ids: [id],
         play: true,
     };
+    debugLog("body from transfer request response:");
     fetch('https://api.spotify.com/v1/me/player', {
         method: 'PUT',
         headers: {
@@ -321,7 +343,7 @@ function transferToDevice(id, token) {
         },
         body: JSON.stringify(data),
     })
-        .then(response => console.log(response));
+        .then(response => debugLog(response.body));
 }
 
 function changePosition(player, deltaSeconds) {
@@ -333,10 +355,6 @@ function changePosition(player, deltaSeconds) {
         }
     });
 }
-
-btnTransfer.onclick = function() {
-    transferToDevice(localStorage.getItem(deviceIdKey), localStorage.getItem(tokenKey));
-};
 </script>
 </body>
 </html>
