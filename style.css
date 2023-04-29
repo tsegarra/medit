@@ -130,12 +130,23 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     width: 20px;
 }
 
-.abc-notation-panel {
+.abc-notation-panel,
+.prediction-panel
+{
     padding: 1em;
     border-radius: 2px;
     border: 1px solid;
     font-family: monospace;
     background-color: white;
+    overflow-y: scroll;
+}
+
+.abc-notation-panel {
+    max-height: 4em;
+}
+
+.prediction-panel {
+    max-height: 1em;
 }
 
 .abc-notation-panel.invalid {

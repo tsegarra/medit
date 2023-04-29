@@ -25,6 +25,8 @@
 
     <p class="abc-notation-panel"></p>
 
+    <p class="prediction-panel">...</p>
+
     <div id="playback-buttons" class="button-row row-halves">
         <button id="btn-play"><i class="fa-solid fa-play"></i></button>
         <button id="btn-stop"><i class="fa-solid fa-square"></i></button>
@@ -289,13 +291,14 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     const params = new URLSearchParams(queryString);
     const tokenFromQueryString = params.get('access_token');
 
+    // todo re-enable these
     if (tokenFromQueryString) {
-        history.pushState(null, "", location.href.split("#")[0]);
-        connectToSpotify(tokenFromQueryString);
+        //history.pushState(null, "", location.href.split("#")[0]);
+        //connectToSpotify(tokenFromQueryString);
     } else if (localToken) {
-        connectToSpotify(localToken);
+        //connectToSpotify(localToken);
     } else {
-        getNewToken();
+        //getNewToken();
     }
 };
 
