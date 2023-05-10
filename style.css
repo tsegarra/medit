@@ -156,6 +156,7 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     padding: 1em;
     box-sizing: border-box;
     font-family: monospace;
+    display: none;
 }
 
 .abc-notation-panel.invalid {
