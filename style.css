@@ -145,6 +145,20 @@ span.firebaseui-idp-text.firebaseui-idp-text-short {
     max-height: 4em;
 }
 
+.mode-playing .abc-notation-panel {
+    border-color: #54ff54;
+}
+
+#btn-stop {
+    display: none;
+}
+.mode-playing #btn-stop {
+    display: block;
+}
+.mode-playing #btn-play {
+    display: none;
+}
+
 .prediction-panel {
     max-height: 1em;
 }
@@ -200,6 +214,10 @@ header > h1 {
 
 .show-accidentals .btn-scale-degree {
     width: calc((100% - (var(--btn-gap) * 10))/11);
+}
+
+.row-full > button {
+    width: 100%;
 }
 
 .row-halves > button {
@@ -327,3 +345,7 @@ h1 > a {
 }
 
 .hidden-until-player-loaded { display: none; }
+
+#togglePlay.spotify-playing {
+    background-color: #1cd760;
+}
