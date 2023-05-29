@@ -279,9 +279,11 @@ function connectToSpotify(token) {
                     if (state.paused) {
                         debugLog("(state paused)");
                         btnPlay.textContent = 'Pause';
+                        btnPlay.classList.add('spotify-playing');
                     } else {
                         debugLog("(state != paused, changing text to 'Play'. could be something else though)");
                         btnPlay.textContent = 'Play';
+                        btnPlay.classList.remove('spotify-playing');
                     }
                 } else {
                     debugLog("no state was returned");
