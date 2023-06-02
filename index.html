@@ -326,7 +326,7 @@ function getNewToken() {
     debugLog("getting new token...");
     const clientId = '3c969ca08c62441186e99afc7ba69477';
     const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=streaming+user-read-email+user-modify-playback-state+user-read-private&redirect_uri=https%3A%2F%2Ftsegarra.github.io%2Fmedit&state=075a4495-70d1-4862-be93-71c0ce1d845d`;
-    //window.location.href = authUrl;
+    window.location.href = authUrl;
 }
 
 function transferToDevice(id, token) {
