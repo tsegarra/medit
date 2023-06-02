@@ -1,13 +1,16 @@
 <html lang="en">
 <head>
-    <title>ABC Editor</title>
+    <title>Song Patterns | Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/9d84495d6e.js" crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 </head>
 <body class="dark-bg padding-std font-sans">
 <header>
-    <h1><a href="index.html">ABC Editor</a></h1>
+    <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="Song Patterns" /></a></h1>
     <div id="login-options">
         <div id="firebaseui-auth-container"></div>
         <div id="user-logo"></div>
@@ -323,7 +326,7 @@ function getNewToken() {
     debugLog("getting new token...");
     const clientId = '3c969ca08c62441186e99afc7ba69477';
     const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=streaming+user-read-email+user-modify-playback-state+user-read-private&redirect_uri=https%3A%2F%2Ftsegarra.github.io%2Fmedit&state=075a4495-70d1-4862-be93-71c0ce1d845d`;
-    window.location.href = authUrl;
+    //window.location.href = authUrl;
 }
 
 function transferToDevice(id, token) {
