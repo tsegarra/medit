@@ -2,7 +2,7 @@
 <head>
     <title>Song Patterns | Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
     <script src="https://kit.fontawesome.com/9d84495d6e.js" crossorigin="anonymous"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -10,14 +10,16 @@
 </head>
 <body class="dark-bg padding-std font-sans">
 <header>
-    <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="Song Patterns" /></a></h1>
-    <div id="login-options">
-        <div id="firebaseui-auth-container"></div>
-        <div id="user-logo"></div>
+    <div class="header-elements gutter">
+        <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="Song Patterns"/></a></h1>
+        <div id="login-options">
+            <div id="firebaseui-auth-container"></div>
+            <div id="user-logo"></div>
+        </div>
     </div>
 </header>
 
-<main id="ui-container" class="pitch-selected">
+<main id="ui-container" class="pitch-selected gutter">
     <p class="abc-notation-panel"></p>
 
     <div id="playback-buttons" class="button-row row-full">
@@ -31,331 +33,187 @@
             <button id="btn-save"><i class="fa-solid fa-floppy-disk"></i></button>
         </div>
 
-        <div class="spotify-controls button-row row-fifths">
-            <button class="hidden-until-player-loaded" id="seekBackward15">-15</button>
-            <button class="hidden-until-player-loaded" id="seekBackward3">-3</button>
-            <button class="hidden-until-player-loaded" id="togglePlay">Play</button>
-            <button class="hidden-until-player-loaded" id="seekForward3">+3</button>
-            <button class="hidden-until-player-loaded" id="seekForward15">+15</button>
+        <div class="spotify-controls button-row row-fifths hidden-until-player-loaded">
+            <button id="seekBackward15">-15</button>
+            <button id="seekBackward3">-3</button>
+            <button id="togglePlay">Play</button>
+            <button id="seekForward3">+3</button>
+            <button id="seekForward15">+15</button>
+        </div>
+
+        <div class="spotify-controls hidden-until-player-loaded">
+            <p id="spotify-track-playing">[Polling for current track...]</p>
+        </div>
+
+        <div id="spotify-transfer-container" class="spotify-transfer spotify-control button-row row-full">
+            <button id="btn-spotify-transfer">Transfer Spotify control</button>
+        </div>
+
+        <div id="spotify-connect-container" class="spotify-connect spotify-control button-row row-full">
+            <button id="btn-spotify-token">Get new Spotify token</button>
         </div>
     </section>
 
     <div class="tab-container">
-        <div class="button-row row-thirds">
-            <button id="btn-select-pitch">Pitch</button>
-            <button id="btn-select-rhythm">Rhythm</button>
-            <button id="btn-select-metadata">Metadata</button>
-            <!--<button id="btn-select-debug">Debug</button>-->
-        </div>
-
-        <div class="tabs">
-            <div id="scale-degree-inputs" class="tab pitch-tab">
-                <div class="key-input-container">
-                    <label for="abc-metadata-key">Key</label>
-                    <select id="abc-metadata-key">
-                        <option value="C">C</option>
-                        <option value="Db">C#/Db</option>
-                        <option value="D">D</option>
-                        <option value="Eb">D#/Eb</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="F#">F#/Gb</option>
-                        <option value="G">G</option>
-                        <option value="Ab">G#/Ab</option>
-                        <option value="A">A</option>
-                        <option value="Bb">A#/Bb</option>
-                        <option value="B">B</option>
-                    </select>
-                </div>
-
-                <div class="button-row">
-                    <button class="btn-scale-degree" id="btn-scale-degree-1-down">1</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2-down">b2</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-2-down">2</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b3-down">b3</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-3-down">3</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-4-down">4</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b5-down">b5</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-5-down">5</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b6-down">b6</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-6-down">6</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b7-down">b7</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-7-down">7</button>
-                </div>
-
-                <div class="button-row">
-                    <button class="btn-scale-degree" id="btn-scale-degree-1">1</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2">b2</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-2">2</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b3">b3</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-3">3</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-4">4</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b5">b5</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-5">5</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b6">b6</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-6">6</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b7">b7</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-7">7</button>
-                </div>
-
-                <div class="button-row">
-                    <button class="btn-scale-degree" id="btn-scale-degree-1-up">1</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2-up">b2</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-2-up">2</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b3-up">b3</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-3-up">3</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-4-up">4</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b5-up">b5</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-5-up">5</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b6-up">b6</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-6-up">6</button>
-                    <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b7-up">b7</button>
-                    <button class="btn-scale-degree" id="btn-scale-degree-7-up">7</button>
-                </div>
-
-                <div class="button-row row-thirds">
-                    <button id="btn-backspace"><i class="fa-solid fa-delete-left"></i></button>
-                    <button id="btn-scale-degree-0">Rest</button>
-                    <button class="btn-octave" id="btn-toggle-accidentals">#/b</button>
-                </div>
+        <div class="gutter">
+            <div class="button-row row-thirds">
+                <button id="btn-select-pitch">Pitch</button>
+                <button id="btn-select-rhythm">Rhythm</button>
+                <button id="btn-select-metadata">Metadata</button>
+                <!--<button id="btn-select-debug">Debug</button>-->
             </div>
-
-            <div class="tab rhythm-tab">
-                <div class="row-halves">
-                    <button id="btn-rhythm-prev">&lt;</button>
-                    <button id="btn-rhythm-next">&gt;</button>
-                </div>
-                <div class="row-thirds">
-                    <button id="btn-pickup">Pickup</button>
-                    <button id="btn-tie">Tie</button>
-                    <button id="btn-dot">Dot</button>
-                </div>
-                <div class="row-quarters row-duration">
-                    <button id="btn-whole"><img src="images/whole.png" alt="Whole note" /></button>
-                    <button id="btn-half"><img src="images/half.png" alt="Half note" /></button>
-                    <button id="btn-quarter"><img src="images/quarter.png" alt="Quarter note" /></button>
-                    <button id="btn-eighth"><img src="images/eighth.png" alt="Eighth note" /></button>
-                </div>
-                <div class="row-quarters row-duration">
-                    <button id="btn-sixteenth"><img src="images/sixteenth.png" alt="Sixteenth note" /></button>
-                    <button id="btn-thirty-second"><img src="images/thirtysecond.png" alt="Thirty-second note" /></button>
-                    <button id="btn-q-triplets"><img src="images/quarter3.png" alt="Quarter note triplets" /></button>
-                    <button id="btn-e-triplets"><img src="images/eighth3.png" alt="Eighth note triplets" /></button>
-                </div>
-            </div>
-
-            <div class="tab metadata-tab">
-                <section id="metadata">
-                    <div class="control-group-octave">
-                        <label for="abc-metadata-octave">Octave</label>
-                        <button class="btn-octave" id="btn-octave-down">-</button>
-                        <span id="abc-metadata-octave">1</span>
-                        <button class="btn-octave" id="btn-octave-up">+</button>
+            <div class="tabs">
+                <div id="scale-degree-inputs" class="tab pitch-tab">
+                    <div class="key-input-container">
+                        <label for="abc-metadata-key">Key</label>
+                        <select id="abc-metadata-key">
+                            <option value="C">C</option>
+                            <option value="Db">C#/Db</option>
+                            <option value="D">D</option>
+                            <option value="Eb">D#/Eb</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="F#">F#/Gb</option>
+                            <option value="G">G</option>
+                            <option value="Ab">G#/Ab</option>
+                            <option value="A">A</option>
+                            <option value="Bb">A#/Bb</option>
+                            <option value="B">B</option>
+                        </select>
                     </div>
 
-                    <input type="checkbox" id="swung" name="swung" />
-                    <label for="swung">Swung</label>
-                    <br />
-
-                    <input type="checkbox" id="insert-mode" name="insert-mode" />
-                    <label for="insert-mode">Insert mode</label>
-                    <br />
-
-                    <label for="abc-metadata-output-swing-subdivisions">Swing subdivision</label>
-                    <span id="abc-metadata-output-swing-subdivisions">16n</span>
-                    <button class="btn-octave" id="btn-toggle-subdivision">8/16</button>
-                    <br />
-
-                    <div id="time-sig-buttons" class="button-row row-thirds selected-4-4">
-                        <button id="btn-time-sig-4-4">4/4</button>
-                        <button id="btn-time-sig-6-8">6/8</button>
-                        <button id="btn-time-sig-12-8">12/8</button>
+                    <div class="button-row">
+                        <button class="btn-scale-degree" id="btn-scale-degree-1-down">1</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2-down">b2</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-2-down">2</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b3-down">b3</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-3-down">3</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-4-down">4</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b5-down">b5</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-5-down">5</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b6-down">b6</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-6-down">6</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b7-down">b7</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-7-down">7</button>
                     </div>
 
-                    <form id="metadata-text-inputs">
-                        <label for="bpm">BPM</label><input type="number" name="bpm" id="bpm" /><br />
-                        <button id="btn-tap-tempo">Tempo Tap</button>
-                        <label for="song-title">Title</label><input type="text" name="song-title" id="song-title" /><br />
-                        <label for="song-artist">Artist</label><input type="text" name="song-artist" id="song-artist" /><br />
-                        <label for="song-section">Section</label><input type="text" name="song-section" id="song-section" />
-                    </form>
-                </section>
-            </div>
+                    <div class="button-row">
+                        <button class="btn-scale-degree" id="btn-scale-degree-1">1</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2">b2</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-2">2</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b3">b3</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-3">3</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-4">4</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b5">b5</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-5">5</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b6">b6</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-6">6</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b7">b7</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-7">7</button>
+                    </div>
 
-            <div class="tab debug-tab">
-                <p id="debug-panel"></p>
+                    <div class="button-row">
+                        <button class="btn-scale-degree" id="btn-scale-degree-1-up">1</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b2-up">b2</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-2-up">2</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b3-up">b3</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-3-up">3</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-4-up">4</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b5-up">b5</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-5-up">5</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b6-up">b6</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-6-up">6</button>
+                        <button class="btn-accidental btn-scale-degree" id="btn-scale-degree-b7-up">b7</button>
+                        <button class="btn-scale-degree" id="btn-scale-degree-7-up">7</button>
+                    </div>
+
+                    <div class="button-row row-thirds">
+                        <button id="btn-backspace"><i class="fa-solid fa-delete-left"></i></button>
+                        <button id="btn-scale-degree-0">Rest</button>
+                        <button class="btn-octave" id="btn-toggle-accidentals">#/b</button>
+                    </div>
+                </div>
+
+                <div class="tab rhythm-tab">
+                    <div class="row-halves">
+                        <button id="btn-rhythm-prev">&lt;</button>
+                        <button id="btn-rhythm-next">&gt;</button>
+                    </div>
+                    <div class="row-thirds">
+                        <button id="btn-pickup">Pickup</button>
+                        <button id="btn-tie">Tie</button>
+                        <button id="btn-dot">Dot</button>
+                    </div>
+                    <div class="row-quarters row-duration">
+                        <button id="btn-whole"><img src="images/whole.png" alt="Whole note"/></button>
+                        <button id="btn-half"><img src="images/half.png" alt="Half note"/></button>
+                        <button id="btn-quarter"><img src="images/quarter.png" alt="Quarter note"/></button>
+                        <button id="btn-eighth"><img src="images/eighth.png" alt="Eighth note"/></button>
+                    </div>
+                    <div class="row-quarters row-duration">
+                        <button id="btn-sixteenth"><img src="images/sixteenth.png" alt="Sixteenth note"/></button>
+                        <button id="btn-thirty-second"><img src="images/thirtysecond.png" alt="Thirty-second note"/>
+                        </button>
+                        <button id="btn-q-triplets"><img src="images/quarter3.png" alt="Quarter note triplets"/>
+                        </button>
+                        <button id="btn-e-triplets"><img src="images/eighth3.png" alt="Eighth note triplets"/></button>
+                    </div>
+                </div>
+
+                <div class="tab metadata-tab">
+                    <section id="metadata">
+                        <div class="control-group-octave">
+                            <label for="abc-metadata-octave">Octave</label>
+                            <button class="btn-octave" id="btn-octave-down">-</button>
+                            <span id="abc-metadata-octave">1</span>
+                            <button class="btn-octave" id="btn-octave-up">+</button>
+                        </div>
+
+                        <input type="checkbox" id="swung" name="swung"/>
+                        <label for="swung">Swung</label>
+                        <br/>
+
+                        <input type="checkbox" id="insert-mode" name="insert-mode"/>
+                        <label for="insert-mode">Insert mode</label>
+                        <br/>
+
+                        <label for="abc-metadata-output-swing-subdivisions">Swing subdivision</label>
+                        <span id="abc-metadata-output-swing-subdivisions">16n</span>
+                        <button class="btn-octave" id="btn-toggle-subdivision">8/16</button>
+                        <br/>
+
+                        <div id="time-sig-buttons" class="button-row row-thirds selected-4-4">
+                            <button id="btn-time-sig-4-4">4/4</button>
+                            <button id="btn-time-sig-6-8">6/8</button>
+                            <button id="btn-time-sig-12-8">12/8</button>
+                        </div>
+
+                        <form id="metadata-text-inputs">
+                            <label for="bpm">BPM</label><input type="number" name="bpm" id="bpm"/><br/>
+                            <button id="btn-tap-tempo">Tempo Tap</button>
+                            <label for="song-title">Title</label><input type="text" name="song-title"
+                                                                        id="song-title"/><br/>
+                            <label for="song-artist">Artist</label><input type="text" name="song-artist"
+                                                                          id="song-artist"/><br/>
+                            <label for="song-section">Section</label><input type="text" name="song-section"
+                                                                            id="song-section"/>
+                        </form>
+                    </section>
+                </div>
+
+                <div class="tab debug-tab">
+                    <p id="debug-panel"></p>
+                </div>
             </div>
         </div>
     </div>
 </main>
 
-<div id="loading-circle"><img src="loading.gif" alt="Loading..." /></div>
+<div id="loading-circle"><img src="loading.gif" alt="Loading..."/></div>
 
 <script src="bundle.js"></script>
+<script src="spotify.js"></script>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 
-<script>
-const tokenKey = 'spotify_token';
-const deviceIdKey = 'spotify_device_id';
-const btnPlay = document.getElementById('togglePlay');
-const btnSeekForward3 = document.getElementById('seekForward3');
-const btnSeekForward15 = document.getElementById('seekForward15');
-const btnSeekBackward3 = document.getElementById('seekBackward3');
-const btnSeekBackward15 = document.getElementById('seekBackward15');
-const hiddenButtons = document.getElementsByClassName('hidden-until-player-loaded');
-const debugPanel = document.getElementById("debug-panel");
-
-function debugLog(message) {
-    const timestamp = (new Date()).toLocaleTimeString()
-    debugPanel.innerHTML += `[${timestamp}] ${message}<br />`;
-}
-
-function connectToSpotify(token) {
-    debugLog("connecting to spotify...");
-    const player = new Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => {
-            cb(token);
-        },
-        volume: 0.5
-    });
-
-    player.addListener('ready', ({device_id}) => {
-        debugLog("player is ready");
-        localStorage.setItem(tokenKey, token);
-        localStorage.setItem(deviceIdKey, device_id);
-        console.log('Ready with Device ID', device_id);
-        transferToDevice(device_id, token);
-        Array.from(hiddenButtons).forEach((button) => {
-            button.classList.remove('hidden-until-player-loaded');
-        });
-    });
-
-    player.addListener('not_ready', ({device_id}) => {
-        debugLog("device id has gone offline");
-        console.log('Device ID has gone offline', device_id);
-    });
-
-    player.addListener('initialization_error', ({message}) => {
-        console.log('init error');
-        console.error(message);
-        debugLog("initialization error:");
-        debugLog(message);
-    });
-
-    player.addListener('authentication_error', ({message}) => {
-        getNewToken();
-        console.log('auth_error');
-        console.error(message);
-        debugLog("authentication error:");
-        debugLog(message);
-    });
-
-    player.addListener('account_error', ({message}) => {
-        console.log('account_error');
-        console.error(message);
-        debugLog("account error:");
-        debugLog(message);
-    });
-
-    btnSeekForward3.onclick = function () {
-        changePosition(player, 3);
-    };
-
-    btnSeekForward15.onclick = function () {
-        changePosition(player, 15);
-    };
-
-    btnSeekBackward3.onclick = function () {
-        changePosition(player, -3);
-    };
-
-    btnSeekBackward15.onclick = function () {
-        changePosition(player, -15);
-    };
-
-    btnPlay.onclick = function () {
-        console.log('toggle play');
-        player.togglePlay().then(() => {
-            player.getCurrentState().then(state => {
-                if (state) {
-                    if (state.paused) {
-                        debugLog("(state paused)");
-                        btnPlay.textContent = 'Pause';
-                        btnPlay.classList.add('spotify-playing');
-                    } else {
-                        debugLog("(state != paused, changing text to 'Play'. could be something else though)");
-                        btnPlay.textContent = 'Play';
-                        btnPlay.classList.remove('spotify-playing');
-                    }
-                } else {
-                    debugLog("no state was returned");
-                    alert('Set your device in Spotify to the SDK.');
-                }
-            });
-        });
-    };
-
-    player.connect();
-}
-
-window.onSpotifyWebPlaybackSDKReady = () => {
-    debugLog("spotify web playback sdk ready");
-
-    const localToken = localStorage.getItem(tokenKey);
-
-    const currentUrl = window.location.href;
-    const queryString = currentUrl.split('#')[1];
-    const params = new URLSearchParams(queryString);
-    const tokenFromQueryString = params.get('access_token');
-
-    if (tokenFromQueryString) {
-        debugLog("has token from querystring");
-        history.pushState(null, "", location.href.split("#")[0]);
-        connectToSpotify(tokenFromQueryString);
-    } else if (localToken) {
-        debugLog("no token in querystring; has token in local storage");
-        connectToSpotify(localToken);
-    } else {
-        debugLog("no token in querystring or localstorage; getting new token")
-        getNewToken();
-    }
-};
-
-function getNewToken() {
-    debugLog("getting new token...");
-    const clientId = '3c969ca08c62441186e99afc7ba69477';
-    const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=streaming+user-read-email+user-modify-playback-state+user-read-private&redirect_uri=https%3A%2F%2Ftsegarra.github.io%2Fmedit&state=075a4495-70d1-4862-be93-71c0ce1d845d`;
-    window.location.href = authUrl;
-}
-
-function transferToDevice(id, token) {
-    debugLog("transferring to device...");
-    const data = {
-        device_ids: [id],
-        play: true,
-    };
-    debugLog("body from transfer request response:");
-    fetch('https://api.spotify.com/v1/me/player', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-        },
-        body: JSON.stringify(data),
-    })
-        .then(response => debugLog(response.body));
-}
-
-function changePosition(player, deltaSeconds) {
-    player.getCurrentState().then(state => {
-        if (state) {
-            player.seek(state.position + 1000*deltaSeconds).then(() => console.log('sought'));
-        } else {
-            alert('Set your device in Spotify to the SDK.');
-        }
-    });
-}
-</script>
 </body>
 </html>

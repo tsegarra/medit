@@ -188,19 +188,28 @@ header, main {
     padding-right: 0.5em;
 }
 
+.gutter {
+    max-width: 830px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 header {
-    display: flex;
-    padding-top: 0.5em;
     background-color: #1f5ccd;
     color: white;
-    padding-bottom: 0.5em;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 1em;
     box-shadow: 0 1px 1px black;
 }
 
-header > h1 {
+.header-elements {
+    display: flex;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-elements > h1 {
     margin: 0;
     font-weight: normal;
     font-size: 1em;
@@ -352,4 +361,21 @@ h1 > a {
 
 .logo {
     width: 32px;
+}
+
+.spotify-control {
+    display: none;
+}
+.spotify-control.ready {
+    display: block;
+}
+
+p#spotify-track-playing {
+    border: 1px solid;
+    color: green;
+    background-color: white;
+    font-family: monospace;
+    padding: 0.25em 1em;
+    border-radius: 4px;
+    text-align: center;
 }
