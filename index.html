@@ -42,7 +42,10 @@
         </div>
 
         <div class="spotify-controls hidden-until-player-loaded">
-            <p id="spotify-track-playing">[Polling for current track...]</p>
+            <div class="spotify-track-playing-container">
+                <img id="spotify-art" alt="Art of currently playing track." />
+                <p id="spotify-track-playing">[Polling for current track...]</p>
+            </div>
         </div>
 
         <div id="spotify-transfer-container" class="spotify-transfer spotify-control button-row row-full">
