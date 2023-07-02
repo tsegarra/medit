@@ -59,10 +59,11 @@
 
     <div class="tab-container">
         <div class="gutter">
-            <div class="button-row row-thirds">
+            <div class="button-row row-quarters">
                 <button id="btn-select-pitch">Pitch</button>
                 <button id="btn-select-rhythm">Rhythm</button>
                 <button id="btn-select-metadata">Metadata</button>
+                <button id="btn-select-songs">Songs</button>
                 <!--<button id="btn-select-debug">Debug</button>-->
             </div>
             <div class="tabs">
@@ -204,6 +205,10 @@
                     </section>
                 </div>
 
+                <div class="tab songs-tab">
+                    <div id="songs-container"></div>
+                </div>
+
                 <div class="tab debug-tab">
                     <p id="debug-panel"></p>
                 </div>
@@ -214,9 +219,45 @@
 
 <div id="loading-circle"><img src="loading.gif" alt="Loading..."/></div>
 
+<script>
+    function gapiLoaded() {
+        gapi.load('client', function () {
+            gapi.client.init({
+                apiKey: 'AIzaSyBJ4niYNhHDOLMFw-HT4y6vtoDHwm-r5DI',
+                discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+            }).then(() => {
+                gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: '1o8sUVbWFUNOwnGn9si_QhHQOrx_VyXymN549TlEYuD0',
+                    range: 'A1:G1000',
+                }).then((response) => {
+                    const range = response.result;
+                    if (!range || !range.values || range.values.length === 0) {
+                        console.log('no values found');
+                        return;
+                    }
+
+                    const currentUrl = window.location.href;
+                    const queryString = currentUrl.split('?')[1];
+                    const params = new URLSearchParams(queryString);
+                    const artists = SpreadsheetParser.parse(range.values);
+                    SpreadsheetParser.filterAndPopulateFromDb(artists, params.get('sh') === 'true').then((artists) => {
+                        window.dispatchEvent(new CustomEvent('gotCatalogue', {
+                            detail: {
+                                artists: artists
+                            },
+                        }));
+                    });
+                });
+            });
+        });
+    }
+</script>
+
 <script src="bundle.js"></script>
 <script src="spotify.js"></script>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script src="parser.js"></script>
+<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
 
 </body>
 </html>

@@ -189,7 +189,7 @@
                 const queryString = currentUrl.split('?')[1];
                 const params = new URLSearchParams(queryString);
                 const artists = SpreadsheetParser.parse(range.values);
-                SpreadsheetParser.writeTableToDom(artists, params.get('sh') === 'true');
+                SpreadsheetParser.filterAndPopulateFromDb(artists, params.get('sh') === 'true').then(SpreadsheetParser.writeCatalogueDom);
               });
             });
           });

@@ -309,11 +309,14 @@ h1 > a {
 .metadata-selected #btn-select-metadata,
 .rhythm-selected #btn-select-rhythm,
 .debug-selected #btn-select-debug,
-.pitch-selected #btn-select-pitch {
+.pitch-selected #btn-select-pitch,
+.songs-selected #btn-select-songs
+{
     box-shadow: 0 0 3px inset;
     background-color: #d3e0fb;
 }
 
+.songs-selected .songs-tab,
 .debug-selected .debug-tab,
 .metadata-selected .metadata-tab,
 .rhythm-selected .rhythm-tab,
@@ -393,4 +396,21 @@ h1 > a {
 
 #spotify-track-playing {
     margin: 0;
+}
+
+#songs-container {
+    height: 165px;
+    border: 1px solid;
+    padding: 1em;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+.songs-container-item {
+    margin: 0 0 0.75em;
+    box-shadow: 0 0 2px;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    cursor: pointer;
 }
