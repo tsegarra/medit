@@ -16,6 +16,8 @@
             text-align: center;
             border-radius: 3px;
             font-weight: bold;
+            -webkit-user-select: none;
+            user-select: none;
         }
         #tempo-button {
             background-color: #f9f971;
@@ -122,7 +124,7 @@
 <main id="ui-container" class="pitch-selected gutter">
     <div class="tapper-status">
         <p>BPM: <span id="bpm">120</span></p>
-        <p>Recording: <span id="status">No</span></p>
+        <p>Status: <span id="status">Not recording</span></p>
     </div>
 
     <div class="buttons state-configuration">

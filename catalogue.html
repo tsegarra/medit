@@ -185,11 +185,8 @@
                   return;
                 }
 
-                const currentUrl = window.location.href;
-                const queryString = currentUrl.split('?')[1];
-                const params = new URLSearchParams(queryString);
                 const artists = SpreadsheetParser.parse(range.values);
-                SpreadsheetParser.filterAndPopulateFromDb(artists, params.get('sh') === 'true').then(SpreadsheetParser.writeCatalogueDom);
+                SpreadsheetParser.filterAndPopulateFromDb(artists).then(SpreadsheetParser.writeCatalogueDom);
               });
             });
           });

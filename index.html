@@ -240,11 +240,8 @@
                         return;
                     }
 
-                    const currentUrl = window.location.href;
-                    const queryString = currentUrl.split('?')[1];
-                    const params = new URLSearchParams(queryString);
                     const artists = SpreadsheetParser.parse(range.values);
-                    SpreadsheetParser.filterAndPopulateFromDb(artists, params.get('sh') === 'true').then((artists) => {
+                    SpreadsheetParser.filterAndPopulateFromDb(artists).then((artists) => {
                         window.dispatchEvent(new CustomEvent('gotCatalogue', {
                             detail: {
                                 artists: artists
