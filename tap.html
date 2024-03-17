@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+    <title>Song Patterns | Tap Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://kit.fontawesome.com/9d84495d6e.js" crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <style>
+        .tap-style-button {
+            box-shadow: 0 0 3px;
+            cursor: pointer;
+            flex-grow: 1;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        #tempo-button {
+            background-color: #f9f971;
+        }
+        #tap-button {
+            background-color: #ff9292;
+        }
+        #note-button {
+            background-color: #7ef07e;
+        }
+
+        .tapper-status {
+            padding: 1rem;
+            font-family: monospace;
+            background-color: white;
+            box-shadow: 0 0 2px inset black;
+            margin-bottom: 1rem;
+        }
+
+        .tapper-status > p {
+            margin: 0;
+        }
+
+        .measure {
+            border: 1px solid black;
+            border-bottom: none;
+            display: flex;
+            position: relative;
+        }
+
+        .beat {height: 1rem;display: flex;}
+
+        .measure:last-child {
+            border-bottom: 1px solid black;
+        }
+
+        .beat, .sixteenth {
+            border-right: 1px solid black;
+            flex-grow: 1;
+        }
+
+        .onset {
+            position: absolute;
+            height: 1rem;
+            opacity: 0.7;
+        }
+
+        .onset.selected {
+            border: 1px solid black;
+        }
+
+        #grid {
+            width: 500px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .beat:nth-child(4) {
+            border-right: none;
+        }
+
+        #ui-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #e3e3e3;
+            padding: 1rem;
+            box-shadow: 0 0 2px;
+        }
+
+        .button-set {
+            display: none;
+            gap: 0.5rem;
+        }
+
+        .state-configuration .button-set-configuration {
+            display: flex;
+        }
+
+        .state-record .button-set-record {
+            display: flex;
+        }
+
+        .state-edit .button-set-edit {
+            display: flex;
+        }
+
+        .button-set-edit .tap-style-button {
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="dark-bg padding-std font-sans">
+<header>
+    <div class="header-elements gutter">
+        <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="Song Patterns"/></a></h1>
+    </div>
+</header>
+
+<main id="ui-container" class="pitch-selected gutter">
+    <div class="tapper-status">
+        <p>BPM: <span id="bpm">120</span></p>
+        <p>Recording: <span id="status">No</span></p>
+    </div>
+
+    <div class="buttons state-configuration">
+        <div class="button-set button-set-configuration">
+            <div id="tempo-button" class="tap-style-button">Tap Tempo</div>
+            <div id="tap-button" class="tap-style-button">Start Recording</div>
+        </div>
+        <div class="button-set button-set-record">
+            <div id="note-button" class="tap-style-button">Tap Note</div>
+            <div id="stop-button" class="tap-style-button">Done</div>
+        </div>
+        <div class="button-set button-set-edit">
+            <div id="move-left-button" class="tap-style-button">Mv L</div>
+            <div id="move-right-button" class="tap-style-button">Mv R</div>
+            <div id="select-left-button" class="tap-style-button">Sel L</div>
+            <div id="select-right-button" class="tap-style-button">Sel R</div>
+            <div id="select-none-button" class="tap-style-button">Sel Clr</div>
+            <div id="grow-selection-button" class="tap-style-button">Grow</div>
+            <div id="shrink-selection-button" class="tap-style-button">Shrink</div>
+            <div id="quantize-button" class="tap-style-button">Quantize</div>
+        </div>
+    </div>
+</main>
+
+<script src="tap.js"></script>
+
+</body>
+</html>
