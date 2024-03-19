@@ -94,7 +94,13 @@
 
         .button-set {
             display: none;
+            row-gap: 1rem;
+            flex-direction: column;
+        }
+
+        .tap-button-row {
             gap: 0.5rem;
+            display: flex;
         }
 
         .state-configuration .button-set-configuration {
@@ -110,7 +116,8 @@
         }
 
         .button-set-edit .tap-style-button {
-            padding: 0;
+            background-color: white;
+            padding: 0.5rem;
         }
     </style>
 </head>
@@ -129,22 +136,30 @@
 
     <div class="buttons state-configuration">
         <div class="button-set button-set-configuration">
-            <div id="tempo-button" class="tap-style-button">Tap Tempo</div>
-            <div id="tap-button" class="tap-style-button">Start Recording</div>
+            <div class="tap-button-row">
+                <div id="tempo-button" class="tap-style-button">Tap Tempo</div>
+                <div id="tap-button" class="tap-style-button">Start Recording</div>
+            </div>
         </div>
         <div class="button-set button-set-record">
-            <div id="note-button" class="tap-style-button">Tap Note</div>
-            <div id="stop-button" class="tap-style-button">Done</div>
+            <div class="tap-button-row">
+                <div id="note-button" class="tap-style-button">Tap Note</div>
+                <div id="stop-button" class="tap-style-button">Done</div>
+            </div>
         </div>
         <div class="button-set button-set-edit">
-            <div id="move-left-button" class="tap-style-button">Mv L</div>
-            <div id="move-right-button" class="tap-style-button">Mv R</div>
-            <div id="select-left-button" class="tap-style-button">Sel L</div>
-            <div id="select-right-button" class="tap-style-button">Sel R</div>
-            <div id="select-none-button" class="tap-style-button">Sel Clr</div>
-            <div id="grow-selection-button" class="tap-style-button">Grow</div>
-            <div id="shrink-selection-button" class="tap-style-button">Shrink</div>
-            <div id="quantize-button" class="tap-style-button">Quantize</div>
+            <div class="tap-button-row">
+                <div id="move-left-button" class="tap-style-button">Mv L</div>
+                <div id="move-right-button" class="tap-style-button">Mv R</div>
+                <div id="select-left-button" class="tap-style-button">Sel L</div>
+                <div id="select-right-button" class="tap-style-button">Sel R</div>
+            </div>
+            <div class="tap-button-row">
+                <div id="select-none-button" class="tap-style-button">Sel Clr</div>
+                <div id="grow-selection-button" class="tap-style-button">Grow</div>
+                <div id="shrink-selection-button" class="tap-style-button">Shrink</div>
+                <div id="quantize-button" class="tap-style-button">Quantize</div>
+            </div>
         </div>
     </div>
 </main>
