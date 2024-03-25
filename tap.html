@@ -43,15 +43,15 @@
 
         .measure {
             border: 1px solid black;
-            border-bottom: none;
             display: flex;
             position: relative;
+            margin-bottom: 1rem;
+            height: 1.2rem;
         }
 
-        .beat {height: 1rem;display: flex;}
-
-        .measure:last-child {
-            border-bottom: 1px solid black;
+        .beat {
+            height: 1.2rem;
+            display: flex;
         }
 
         .beat, .sixteenth {
@@ -63,10 +63,22 @@
             position: absolute;
             height: 1rem;
             opacity: 0.7;
+            top: 0.1rem;
+            border-radius: 5px;
         }
 
         .onset.selected {
             border: 1px solid black;
+        }
+
+        .onset.fragment-left {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .onset.fragment-right {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
 
         #grid {
@@ -119,6 +131,11 @@
             background-color: white;
             padding: 0.5rem;
         }
+
+        .abc-notation-panel-container {
+            padding: 0 1rem;
+            display: none;
+        }
     </style>
 </head>
 <body class="dark-bg padding-std font-sans">
@@ -127,6 +144,10 @@
         <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="Song Patterns"/></a></h1>
     </div>
 </header>
+
+<div class="abc-notation-panel-container">
+    <p class="abc-notation-panel"></p>
+</div>
 
 <main id="ui-container" class="pitch-selected gutter">
     <div class="tapper-status">
