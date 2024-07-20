@@ -162,11 +162,17 @@
     </style>
   </head>
   <body>
-    <header>
-        <h1><a href="index.html">ABC Editor</a></h1>
-    </header>
+  <header>
+    <div class="header-elements gutter">
+      <h1><a href="index.html"><img class="logo" src="images/logo.png" alt="Song Patterns"/></a></h1>
+      <div id="login-options">
+        <div id="firebaseui-auth-container"></div>
+        <div id="user-logo"></div>
+      </div>
+    </div>
+  </header>
 
-    <div class="catalogue" id="catalogue-container"></div>
+    <div class="catalogue gutter" id="catalogue-container"></div>
 
     <script>
       function gapiLoaded() {
